@@ -25,3 +25,17 @@ docs = [Document(page_content=text) for text in split_text]
 embedding=embedding_text()
 
 faiss_store_db(docs, embedding)
+
+# RAG (Retrieve and Generate) code
+
+# def store_db():
+#     try:
+#         faiss_vector = FAISS.load_local('faiss_db', embedding, allow_dangerous_deserialization=True)
+#         retrieve = faiss_vector.as_retriever(search_type='similarity', search_kwargs={'k': 3})
+#     except Exception as e:
+#         print(f"Error loading FAISS database: {e}")
+#         return None
+# retriever = store_db()
+# if retriever:
+#     results = retriever.get_relevant_documents("your search query here")
+#     print(results)
