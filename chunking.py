@@ -14,6 +14,6 @@ def text_split(data):
     return metadata[0].page_content if metadata else "No content available."
 
 # Load and split the text
-data = txt_data_load('text.txt') # Text-file-Loader only 
-split_text = text_split(data)
-print("Split Text:\n", split_text)
+# data = txt_data_load('text.txt') # Text-file-Loader only
+# split_text = text_split(data)
+# print("Split Text:\n", split_text)
