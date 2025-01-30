@@ -1,5 +1,5 @@
 from langchain_community.vectorstores import FAISS
-from embedding import faiss_store_db, embedding_text
+from embedding import embedding_text
 from langchain_community.llms import Ollama
 from langchain.chains import RetrievalQA
 
@@ -13,13 +13,12 @@ def store_db():
         print(f"Error loading FAISS database: {e}")
         return None
 
-retriever = store_db()
 
-if retriever:
-    llm = Ollama(model="tinyllama")
-    qa_chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever)
-
-    query = "History of Mahabaleshwar strawberry"
-    result = qa_chain.invoke(query)
-
-    print("Answer from Q&A:", result)
+def retrieve_data(user_query, faiss_index):
+    retriever = store_db()
+    if retriever:
+        llm = Ollama(model="tinyllama")
+        qa_chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever)
+        response = qa_chain.invoke({"query": user_query})
+        return response["result"]
+    return "Sorry, I couldn't process your request. Please try again later."
